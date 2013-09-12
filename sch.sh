@@ -16,24 +16,34 @@ TITLETOUT=$(echo "$TRIMMEDSLICE" | sed -n '7p' | sed 's/<[^>]\+>//g')
 
 COURSESLOTS=$(echo "$TRIMMEDSLICE" | egrep -B1 -A7 " AM-| PM-" | sed 's/<[^>]\+>//g' | grep -v "\-\-")
 
+#Build the output
+OUT=\
+"BEGIN:VCALENDAR
+VERSION:1.0
+BEGIN:VEVENT"
+
 COUNTER=1
 while read p; do
 	MODULO=$(( $COUNTER % 9 ))
 	case $MODULO in
 		1)	#Day of week
-			DAYOFWEEK="$p"
+			#DAYOFWEEK="$p"
+			OUT="$OUT\n$p"
 			echo "Processed day of week"
 			;;
 		2)	#Time slot
-			TIMESLOT="$p"
+			#TIMESLOT="$p"
+			OUT="$OUT\n$p"
 			echo "Processed time slot"
 			;;
 		8)	#Date range
-			DATERANGE="$p"
+			#="$p"
+			OUT="$OUT\n$p"
 			echo "Processed date range"
 			;;
 		0)	#Room number
-			ROOMNUMBER="$p"
+			#ROOMNUMBER="$p"
+			OUT="$OUT\n$p"
 			echo "Processed room number"
 			;;
 #		*)	echo "normal"
@@ -42,7 +52,12 @@ while read p; do
 	COUNTER=$(( $COUNTER + 1 ))
 done <<< "$COURSESLOTS"
 
+OUT=\
+"$OUT
+END:VEVENT
+END:VCALENDAR"
 
+echo -e "$OUT"
 
 #===== Some debug prints =====
 #Course code
