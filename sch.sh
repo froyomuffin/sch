@@ -15,7 +15,7 @@ for i in $*
 do
 	CRN=$i
 
-	SLICE=$(cat 20130906.html | grep -A $SLICESIZE "=$CRN&")
+	SLICE=$(cat 20130906.html | grep -A $SLICESIZE "crn_in=$CRN&")
 	CRNLINES=$(echo "$SLICE" | grep -n "https://horizon.mcgill.ca/pban1/bwckschd.p_disp_listcrse?term_in=" | cut -d: -f1)
 	NEXTCRNLINE=$(echo $CRNLINES | cut -d' ' -f2)
 	TRIMMEDSLICE=$(echo "$SLICE" | sed ''${NEXTCRNLINE}',$d')
