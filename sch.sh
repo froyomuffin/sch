@@ -2,6 +2,7 @@
 
 #Input (CRN)
 CRN=$1
+YEAR=2013
 
 SLICESIZE=100
 
@@ -20,41 +21,64 @@ COURSESLOTS=$(echo "$TRIMMEDSLICE" | egrep -B1 -A7 " AM-| PM-" | sed 's/<[^>]\+>
 OUT=\
 "BEGIN:VCALENDAR
 VERSION:1.0
-BEGIN:VEVENT"
+"
 
 COUNTER=1
 while read p; do
 	MODULO=$(( $COUNTER % 9 ))
 	case $MODULO in
 		1)	#Day of week
-			#DAYOFWEEK="$p"
-			OUT="$OUT\n$p"
-			echo "Processed day of week"
+			if [[ "$p" == *M* ]]
+			then
+				BYDAY="$BYDAY,MO"
+			fi
+			if [[ "$p" == *T* ]]
+			then
+				BYDAY="$BYDAY,TU"
+			fi
+			if [[ "$p" == *W* ]]
+			then
+				BYDAY="$BYDAY,WE"
+			fi
+			if [[ "$p" == *R* ]]
+			then
+				BYDAY="$BYDAY,TH"
+			fi
+			if [[ "$p" == *F* ]]
+			then
+				BYDAY="$BYDAY,FR"
+			fi
+			BYDAY=`echo $BYDAY | sed 's/^.//'` 
 			;;
 		2)	#Time slot
-			#TIMESLOT="$p"
-			OUT="$OUT\n$p"
-			echo "Processed time slot"
+			echo $p
 			;;
 		8)	#Date range
-			#="$p"
-			OUT="$OUT\n$p"
-			echo "Processed date range"
+			STARTDATE=`echo $p | cut -d'-' -f1 | sed -e 's/\//''/g'`
+			STARTDATE=$YEAR$STARTDATE
+
+			ENDDATE=`echo $p | cut -d'-' -f2 | sed -e 's/\//''/g'`
+			ENDDATE=$YEAR$ENDDATE
+			echo "$STARTDATE, $ENDDATE"
 			;;
-		0)	#Room number
-			#ROOMNUMBER="$p"
-			OUT="$OUT\n$p"
-			echo "Processed room number"
+		0)	#Room number + Generate the output
+OUT=\
+"$OUT
+BEGIN:VEVENT"
+
+#
+
+OUT=\
+"$OUT
+END:VEVENT"
 			;;
-#		*)	echo "normal"
-#			;;
 	esac
 	COUNTER=$(( $COUNTER + 1 ))
 done <<< "$COURSESLOTS"
 
 OUT=\
 "$OUT
-END:VEVENT
+
 END:VCALENDAR"
 
 echo -e "$OUT"
