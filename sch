@@ -1,22 +1,31 @@
 #!/bin/bash
 
-#Input (CRN)
-YEAR=2013
+#Through CGI
+if [[ $QUERY_STRING != "" ]]
+then
+	echo "Content-Type: text/plain"
+	echo 'Content-Disposition: attachment; filename="cal.ics"'
+	INPUT=$QUERY_STRING
+	INPUT=$(echo $INPUT | sed 's/crns=//g')
+	INPUT=$(echo $INPUT | sed 's/\(+\|%20\|%2C\|%2B\)/ /g')
+else
+#Through Shell
+	INPUT=$*
+fi
+
+#Configure these
 HARDDATE=20130830
+COURSEHTML="20130906.html"
 SLICESIZE=100
 
-#Build the output header
-OUT=\
-"BEGIN:VCALENDAR
-VERSION:1.0
-"
+YEAR=`date +"%Y"`
 
-for i in $*
+for i in $INPUT
 do
 	CRN=$i
 
-	SLICE=$(cat 20130906.html | grep -A $SLICESIZE "crn_in=$CRN&")
-	CRNLINES=$(echo "$SLICE" | grep -n "https://horizon.mcgill.ca/pban1/bwckschd.p_disp_listcrse?term_in=" | cut -d: -f1)
+	SLICE=$(cat $COURSEHTML | grep -A $SLICESIZE "crn_in=$CRN&")
+	CRNLINES=$(echo "$SLICE" | grep -n "bwckschd.p_disp_listcrse?term_in=" | cut -d: -f1)
 	NEXTCRNLINE=$(echo $CRNLINES | cut -d' ' -f2)
 	TRIMMEDSLICE=$(echo "$SLICE" | sed ''${NEXTCRNLINE}',$d')
 
@@ -98,15 +107,9 @@ END:VEVENT
 
 done
 
-OUT=\
-"$OUT
+echo \
+"
+BEGIN:VCALENDAR
+VERSION:1.0
+$OUT
 END:VCALENDAR"
-
-echo -e "$OUT"
-#===== Some debug prints =====
-#Course code
-#echo "$SUMMARY"
-
-#Course title
-#echo "$DESCRIPTION"
-
