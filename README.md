@@ -1,9 +1,25 @@
 sch
 ===
 
-A small script used to generate an iCal calendar file from McGill course CRNs.
+A small script used to generate an iCal .ics calendar file from McGill course CRNs.
 
-Known Limitations
------------------
+Usage
+-----
+
+1. Shell  
+```
+./sch CRN1 CRN2 ... CRN2
+```
+2. wget  
+```
+wget "http://froyomuffin.com/cgi-bin/sch?CRN1+CRN2+...+CRNn" cal.ics
+```  
+3. Web form  
+Head over to http://froyomuffin.com
+
+4. Host it yourself!
+
+Known Issues 
+------------
 
 - Users will have a very busy day on August 30th 2013.
