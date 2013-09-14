@@ -12,7 +12,7 @@ Usage
 ```
 2. wget  
 ```
-wget "http://froyomuffin.com/cgi-bin/sch?CRN1+CRN2+...+CRNn" cal.ics
+wget -O cal.ics "http://froyomuffin.com/cgi-bin/sch?CRN1+CRN2+...+CRNn"
 ```  
 3. Host it yourself!
 
