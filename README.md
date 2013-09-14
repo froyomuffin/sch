@@ -14,10 +14,7 @@ Usage
 ```
 wget "http://froyomuffin.com/cgi-bin/sch?CRN1+CRN2+...+CRNn" cal.ics
 ```  
-3. Web form  
-Head over to http://froyomuffin.com
-
-4. Host it yourself!
+3. Host it yourself!
 
 Known Issues 
 ------------
