@@ -18,7 +18,7 @@ HARDDATE=20130830
 COURSEHTML="20130906.html"
 SLICESIZE=100
 
-YEAR=`date +"%Y"`
+YEAR=$(date +"%Y")
 
 for i in $INPUT
 do
