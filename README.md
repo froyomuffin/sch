@@ -1,7 +1,7 @@
 sch
 ===
 
-A small script used to generate an iCalendar .ICS file from McGill course CRNs.
+First public project! A small script used to generate an iCalendar .ICS file from McGill course CRNs.
 
 Usage
 -----
@@ -14,12 +14,8 @@ wget -O cal.ics "http://froyomuffin.com/cgi-bin/sch.cgi?CRN1+CRN2+...+CRNn"
 ```  
 3. Shell  
 ```
-./sch CRN1 CRN2 ... CRN2
+./sch.cgi CRN1 CRN2 ... CRNn
 ```
-4. Host it yourself!  
-```
-./install.sh
-```  
 
 Known Issues 
 ------------
