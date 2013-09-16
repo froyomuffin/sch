@@ -2,26 +2,25 @@
 
 body{
 	font-family: 'ABeeZee', sans-serif;
-	font-size: 13px;
+	font-size: 14pt;
 }
 
 input{
     margin-bottom: 5px;
     line-height: 18px;
-    padding: 2px 5px;
-    -webkit-border-radius: 100px;
-    -moz-border-radius: 100px;
-    border-radius: 100px;
-    border: 1px solid #CCC;
+    padding: 2px 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 2px solid #CCC;
     font-family: 'ABeeZee', sans-serif;
-    width: 500px;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 320px;
+    outline: none;
 }
 
 form{
     margin: 0 auto;
-    width:500px;
+    width:320px;
 }
 
 div{

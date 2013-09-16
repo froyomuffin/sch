@@ -25,3 +25,4 @@ Known Issues
 ------------
 
 - Users will have a very busy day on August 30th 2013.
+- Misuse of sed somewhere
