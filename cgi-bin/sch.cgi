@@ -14,11 +14,11 @@ else
 fi
 
 #Configure these
-HARDDATE=20130830
-COURSEHTML="20130906.html"
+HARDDATE=20140101
+COURSEHTML="20131225.html"
 SLICESIZE=100
 
-YEAR=$(date +"%Y")
+YEAR=2014
 
 for i in $INPUT
 do
@@ -33,7 +33,7 @@ do
 
 	DESCRIPTION=$(echo "$TRIMMEDSLICE" | sed -n '7p' | sed 's/<[^>]\+>//g')
 
-	COURSESLOTS=$(echo "$TRIMMEDSLICE" | egrep -B1 -A7 " AM-| PM-" | sed 's/<[^>]\+>//g' | grep -v "\-\-")
+	COURSESLOTS=$(echo "$TRIMMEDSLICE" | egrep -B1 -A9 " AM-| PM-" | sed 's/<[^>]\+>//g' | grep -v "\-\-")
 
 	COUNTER=1
 	while read p; do
@@ -72,7 +72,7 @@ do
 				#->echo "$STARTTIME, $ENDTIME"
 
 				;;
-			8)	#Date range
+			10)	#Date range
 				STARTDATE=`echo $p | cut -d'-' -f1 | sed -e 's/\//''/g'`
 				STARTDATE=$YEAR$STARTDATE
 

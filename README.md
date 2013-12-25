@@ -20,5 +20,5 @@ wget -O cal.ics "http://froyomuffin.com/cgi-bin/sch.cgi?CRN1+CRN2+...+CRNn"
 Known Issues 
 ------------
 
-- Users will have a very busy day on August 30th 2013.
+- Users will have a very busy day on New Years
 - Misuse of sed somewhere
