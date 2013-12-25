@@ -20,5 +20,5 @@ wget -O cal.ics "http://froyomuffin.com/cgi-bin/sch.cgi?CRN1+CRN2+...+CRNn"
 Known Issues 
 ------------
 
-- Users will have a very busy day on New Years
+- There needs to be a date before the first day of term with an entire week worth of courses scheduled
 - Misuse of sed somewhere
